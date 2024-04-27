@@ -40,7 +40,7 @@ export default function RootLayout({
   const buttons = routes.map((route) => {
     "use client";
     return (
-      <div>
+      <div key={route.path}>
         <a tabIndex={-1} href={route.path}>
           <Button variant={"ghost"}>{route.name}</Button>
         </a>

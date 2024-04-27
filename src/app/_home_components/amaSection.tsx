@@ -39,7 +39,11 @@ function AskMeAnything() {
   ];
 
   const badgeExampleQuestions = exampleQuestions.map((question, index) => (
-    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.975 }}>
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.975 }}
+      key={question.replace(" ", "-")}
+    >
       <Badge
         className="mx-1.5 my-1 cursor-pointer"
         variant={"outline"}
