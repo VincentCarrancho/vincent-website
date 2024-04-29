@@ -161,7 +161,7 @@ function AskMeAnything() {
       <div className="mt-8">
         {isFetching && <ResponseChatComponent />}
         {data && !isFetching && <ResponseCard text={data} />}
-        <ResponseChatComponent />
+        {/* <ResponseChatComponent /> */}
       </div>
     </div>
   );
