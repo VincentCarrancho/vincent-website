@@ -69,7 +69,7 @@ function AskMeAnything() {
     queryFn: async (question) => {
       const req = await axios({
         method: "get",
-        url: "http://localhost:3000/api/test",
+        url: "http://localhost:3000/api/",
         params: {
           query: form.getValues("question"),
         },
