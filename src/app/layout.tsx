@@ -42,7 +42,9 @@ export default function RootLayout({
     return (
       <div key={route.path}>
         <a tabIndex={-1} href={route.path}>
-          <Button variant={"ghost"}>{route.name}</Button>
+          <Button variant={"link"} className="text-foreground">
+            {route.name}
+          </Button>
         </a>
       </div>
     );
@@ -63,7 +65,7 @@ export default function RootLayout({
               fontSans.variable
             )}
           >
-            <div className="w-full px-[16.5%] ">
+            <div className="w-full px-[16.5%] py-2">
               <header>
                 <nav className="flex justify-between items-center">
                   <ModeToggle />
