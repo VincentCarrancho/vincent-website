@@ -23,6 +23,14 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import MotionDiv from "@/components/ui/defaultMotionDiv";
 import ResponseCard from "./responseCard";
+import { Input } from "@/components/ui/input";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function AskMeAnything() {
   const [question, setQuestion] = useState<string>("");
@@ -69,7 +77,7 @@ function AskMeAnything() {
     queryFn: async (question) => {
       const req = await axios({
         method: "get",
-        url: "api/",
+        url: "/api",
         params: {
           query: form.getValues("question"),
         },
@@ -108,61 +116,91 @@ function AskMeAnything() {
       <Form {...form}>
         <form
           action=""
-          className="space-y-2"
+          className="space-y-2 w-full"
           onSubmit={form.handleSubmit(onQuestionSubmit)}
         >
-          <FormField
-            control={form.control}
-            name="question"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <MotionDiv scale={1.01}>
-                    <Textarea {...field} placeholder="Ask Here!" />
-                  </MotionDiv>
-                </FormControl>
-                <div className="text-[10px] italic opacity-50">
-                  * This feature is experimental and may produce incorrect
-                  information. Please visit the rest of the website for more
-                  information about me.
-                </div>
-                <div className="flex flex-wrap justify-center">
-                  {badgeExampleQuestions}
-                </div>
-              </FormItem>
-            )}
-          />
-          <div className="flex justify-end space-x-2">
-            <MotionDiv>
-              <Button
-                variant={"outline"}
-                className="space-x-2"
-                type="button"
-                onClick={async () => {
-                  await axios("/api", {
-                    method: "get",
-                  }).then((res) => {
-                    console.log(res);
-                  });
-                }}
-              >
-                <Info size={16} />
-              </Button>
-            </MotionDiv>
+          <div className="flex w-full space-x-4 items-center">
+            <FormField
+              control={form.control}
+              name="question"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormControl>
+                    <MotionDiv scale={1.01}>
+                      <Input {...field} placeholder="Ask Here!" />
+                    </MotionDiv>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
             <MotionDiv>
               <Button className="space-x-2" type="submit" disabled={isFetching}>
-                <p>Send Question</p>
                 <Send size={16} />
               </Button>
             </MotionDiv>
           </div>
+
+          <div className="text-[10px] italic opacity-50">
+            * This feature is experimental and may produce incorrect
+            information. Please visit the rest of the website for more
+            information about me.
+          </div>
+          <div className="mt-8 pb-8">
+            {isFetching && (
+              <div className="space-y-2">
+                <Skeleton className="w-full h-[24px]" />
+                <Skeleton className="w-full h-[24px]" />
+                <Skeleton className="w-full h-[24px]" />
+              </div>
+            )}
+            {data && !isFetching && (
+              <blockquote className="mt-6 border-l-2 pl-6 ">
+                <code className="font-black text-foreground">Vincent: "</code>
+                {data.split(" ").map((el, i) => (
+                  <motion.span
+                    initial={{ opacity: 0.25, rotate: -10 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    transition={{
+                      duration: 0.11,
+                      delay: i / 15,
+                    }}
+                    key={i}
+                    className="my-0"
+                  >
+                    {el + " "}
+                  </motion.span>
+                ))}
+                <code className="font-black">"</code>
+              </blockquote>
+            )}
+            {error && !data && (
+              <code className="m-0 p-0">
+                <h3 className="text-destructive p-0 m-0">
+                  My brain is fried! Too much thinking{" "}
+                  <span className="text-xs">
+                    (something went wrong on the backend)
+                  </span>
+                </h3>
+                <div>Please reload the page (CTRL + R) or (⌘ + R)</div>
+              </code>
+            )}
+          </div>
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="m-0 p-0">
+                Suggested Questions
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex flex-wrap justify-center">
+                  {badgeExampleQuestions}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+
+          <div className="flex justify-end space-x-2"></div>
         </form>
       </Form>
-      <div className="mt-8">
-        {isFetching && <ResponseChatComponent />}
-        {data && !isFetching && <ResponseCard text={data} />}
-        {/* <ResponseChatComponent /> */}
-      </div>
     </div>
   );
 }

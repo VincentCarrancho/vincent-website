@@ -32,9 +32,8 @@ export default function RootLayout({
 }>) {
   const routes = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Projects", path: "/projects" },
-    { name: "Contact", path: "/contact" },
+    { name: "🚧 Projects", path: "/projects" },
+    { name: "🚧 Contact", path: "/contact" },
   ];
 
   const buttons = routes.map((route) => {
@@ -65,7 +64,7 @@ export default function RootLayout({
               fontSans.variable
             )}
           >
-            <div className="w-full px-[16.5%] py-2">
+            <div className="w-full py-2 px-10 fixed bg-background shadow-sm">
               <header>
                 <nav className="flex justify-between items-center">
                   <ModeToggle />
@@ -73,9 +72,9 @@ export default function RootLayout({
                 </nav>
               </header>
             </div>
-            <div className="w-2/3">
-              <div>{children}</div>
-            </div>
+            <main className="pt-[64px] max-w-screen-md w-full md:px-0 px-4">
+              <div className="">{children}</div>
+            </main>
           </body>
         </ThemeProvider>
       </html>
