@@ -155,7 +155,9 @@ function AskMeAnything() {
             )}
             {data && !isFetching && (
               <blockquote className="mt-6 border-l-2 pl-6 ">
-                <code className="font-black text-foreground">Vincent: "</code>
+                <code className="font-black text-foreground">
+                  Vincent: {'"'}
+                </code>
                 {data.split(" ").map((el, i) => (
                   <motion.span
                     initial={{ opacity: 0.25, rotate: -10 }}
@@ -170,7 +172,7 @@ function AskMeAnything() {
                     {el + " "}
                   </motion.span>
                 ))}
-                <code className="font-black">"</code>
+                <code className="font-black">{'"'}</code>
               </blockquote>
             )}
             {error && !data && (

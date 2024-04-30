@@ -10,7 +10,7 @@ export default function Home() {
       <div>
         <h1>Hello! 👋</h1>
         <h1 className="font-black text-6xl sm:text-9xl mt-0 mb-0">
-          I'm <span className="text-primary">Vincent</span>.
+          {`I\'m`} <span className="text-primary">Vincent</span>.
         </h1>
         <h2 className="">
           <span>
@@ -19,9 +19,9 @@ export default function Home() {
         </h2>
         <div>
           I am Florida International University Computer Science Class of 2024
-          graduate and I previously interned at Salesforce (Summer '23') and
-          MetLife (Summer '22') as a Software Engineer Intern. I am experienced
-          in full-stack, Frontend, Backend, and Mobile Development.{" "}
+          graduate and I previously interned at Salesforce ({`Summer '23'`}) and
+          MetLife {`Summer '22'`} as a Software Engineer Intern. I am
+          experienced in full-stack, Frontend, Backend, and Mobile Development.{" "}
           <span className="font-bold italic">
             Now I am a full-time Software Engineer at Salesforce.
           </span>

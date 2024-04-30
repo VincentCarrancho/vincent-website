@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export default function GET() {
+export async function GET(req: NextRequest) {
   return NextResponse.json({
     data: [],
   });
