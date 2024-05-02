@@ -75,7 +75,7 @@ export default function Home() {
         <Card>
           <CardHeader>
             <div className="flex space-x-2">
-              <h3 className="p-0 m-0">Ask me anything about me!</h3>
+              <h3 className="p-0 m-0">Ask anything about me!</h3>
               <CornerRightDown />
             </div>
           </CardHeader>
