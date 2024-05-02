@@ -8,6 +8,13 @@ import { Inter as FontSans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/visual-toggle";
 import { ReactQueryClientProvider } from "@/components/queryProvider";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu } from "lucide-react";
 
 // const fontSans = Noto_Serif({
 //   subsets: ["latin"],
@@ -68,11 +75,29 @@ export default function RootLayout({
               <header>
                 <nav className="flex justify-between items-center">
                   <ModeToggle />
-                  <div className="flex">{buttons}</div>
+                  <div className="hidden md:flex">{buttons}</div>
+                  <div className="md:hidden">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <Menu />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="">
+                        {routes.map((route) => {
+                          return (
+                            <DropdownMenuItem key={route.path}>
+                              <a href={route.path}>{route.name}</a>
+                            </DropdownMenuItem>
+                          );
+                        })}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 </nav>
               </header>
             </div>
-            <main className="pt-[64px] max-w-screen-md w-full md:px-0 px-4">
+            <main className="pt-[64px] max-w-screen-md w-full md:px-0 px-4 pb-[200px]">
               <div className="">{children}</div>
             </main>
           </body>
