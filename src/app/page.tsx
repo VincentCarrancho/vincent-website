@@ -51,16 +51,16 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                 <div className="flex space-x-2 w-full justify-center">
-                  <Button variant={"outline"} size={"icon"}>
-                    <a href="https://github.com/VincentCarrancho">
+                  <a href="https://github.com/VincentCarrancho">
+                    <Button variant={"outline"} size={"icon"}>
                       <Github size={16} />
-                    </a>
-                  </Button>
-                  <Button variant={"outline"} size={"icon"}>
-                    <a href="https://www.linkedin.com/in/vincentcarrancho/">
+                    </Button>
+                  </a>
+                  <a href="https://www.linkedin.com/in/vincentcarrancho/">
+                    <Button variant={"outline"} size={"icon"}>
                       <Linkedin size={16} />
-                    </a>
-                  </Button>
+                    </Button>
+                  </a>
                   <Button variant={"outline"}>
                     <div className="p-0 m-0">Resume</div>
                   </Button>
