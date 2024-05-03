@@ -74,6 +74,7 @@ function AskMeAnything() {
   const { refetch, data, error, isFetching, isPending, isLoading } = useQuery({
     queryKey: ["askQuestion"],
     enabled: false,
+    retry: 1,
     queryFn: async (question) => {
       const req = await axios({
         method: "get",
@@ -82,17 +83,16 @@ function AskMeAnything() {
           query: form.getValues("question"),
         },
       });
-      if ((await req).status === 200) {
+      console.log(req);
+      if (req.status === 200) {
         console.log(req.data);
         return req.data;
-      }
-      if (req.status === 500) {
-        console.log("Error");
-        throw new Error("Internal Server Error");
+      } else {
+        throw new Error("Something went wrong");
       }
     },
     select(data) {
-      return data["message"] as string;
+      return data.data.message as string;
     },
   });
 
@@ -154,27 +154,30 @@ function AskMeAnything() {
               </div>
             )}
             {data && !isFetching && (
-              <blockquote className="mt-6 border-l-2 pl-6 ">
-                <code className="font-black text-foreground">
-                  Vincent: {'"'}
-                </code>
-                {data.split(" ").map((el, i) => (
-                  <motion.span
-                    initial={{ opacity: 0.25, rotate: -10 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    transition={{
-                      duration: 0.11,
-                      delay: i / 15,
-                    }}
-                    key={i}
-                    className="my-0"
-                  >
-                    {el + " "}
-                  </motion.span>
-                ))}
-                <code className="font-black">{'"'}</code>
-              </blockquote>
+              <div>
+                <blockquote className="mt-6 border-l-2 pl-6 ">
+                  <code className="font-black text-foreground">
+                    Vincent: {'"'}
+                  </code>
+                  {data.split(" ").map((el, i) => (
+                    <motion.span
+                      initial={{ opacity: 0.25, rotate: -10 }}
+                      animate={{ opacity: 1, rotate: 0 }}
+                      transition={{
+                        duration: 0.11,
+                        delay: i / 15,
+                      }}
+                      key={i}
+                      className="my-0"
+                    >
+                      {el + " "}
+                    </motion.span>
+                  ))}
+                  <code className="font-black">{'"'}</code>
+                </blockquote>
+              </div>
             )}
+
             {error && !data && (
               <code className="m-0 p-0">
                 <h3 className="text-destructive p-0 m-0">
