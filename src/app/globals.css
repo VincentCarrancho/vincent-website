@@ -115,4 +115,12 @@ h6 {
 
 li {
   list-style-type: disc;
+  margin-left: 1rem;
+  padding-bottom: 0.5rem;
+}
+li li {
+  list-style-type: circle;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
 }
